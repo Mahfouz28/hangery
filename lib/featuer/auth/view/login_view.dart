@@ -19,86 +19,88 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              150.verticalSpace,
-              SvgPicture.asset('assets/svg/Hungry_.svg'),
-              8.verticalSpace,
-              CoustomText(
-                text: 'Welcom Back , descover the fast food',
-                color: Colors.white,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              90.verticalSpace,
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    AppTextFeild(
-                      controller: emailController,
-                      suffixIcon: Icon(Icons.email_outlined),
-
-                      fillColor: Colors.white,
-                      labelText: 'Email',
-                      hintText: 'exampil@.com',
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
-                      },
-                    ),
-                    22.verticalSpace,
-                    AppTextFeild(
-                      controller: passwordController,
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined),
-
-                      fillColor: Colors.white,
-                      labelText: 'Password',
-                      hintText: '***********',
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                    ),
-                    40.verticalSpace,
-                    CustomTextBotton(
-                      backGroundColor: Colors.white,
-                      text: 'Login',
-                      color: AppColors.primaryColor,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          print('Login button pressed');
-                          context.pushNamedAndRemoveUntil(Routs.root);
-                        }
-                      },
-                    ),
-                    22.verticalSpace,
-                    TextButton(
-                      onPressed: () {
-                        context.pushNamed(Routs.signUp);
-                      },
-                      child: CoustomText(
-                        text: 'Create new account',
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                150.verticalSpace,
+                SvgPicture.asset('assets/svg/Hungry_.svg'),
+                8.verticalSpace,
+                CoustomText(
+                  text: 'Welcom Back , descover the fast food',
+                  color: Colors.white,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
                 ),
-              ),
-            ],
+                90.verticalSpace,
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      AppTextFeild(
+                        controller: emailController,
+                        suffixIcon: Icon(Icons.email_outlined),
+
+                        fillColor: Colors.white,
+                        labelText: 'Email',
+                        hintText: 'exampil@.com',
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
+                      22.verticalSpace,
+                      AppTextFeild(
+                        controller: passwordController,
+                        suffixIcon: Icon(Icons.remove_red_eye_outlined),
+
+                        fillColor: Colors.white,
+                        labelText: 'Password',
+                        hintText: '***********',
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      40.verticalSpace,
+                      CustomTextBotton(
+                        backGroundColor: Colors.white,
+                        text: 'Login',
+                        color: AppColors.primaryColor,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            print('Login button pressed');
+                            context.pushNamedAndRemoveUntil(Routs.root);
+                          }
+                        },
+                      ),
+                      22.verticalSpace,
+                      TextButton(
+                        onPressed: () {
+                          context.pushNamed(Routs.signUp);
+                        },
+                        child: CoustomText(
+                          text: 'Create new account',
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
