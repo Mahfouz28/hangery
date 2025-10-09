@@ -79,6 +79,7 @@ class LoginView extends StatelessWidget {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           print('Login button pressed');
+                          context.pushNamedAndRemoveUntil(Routs.root);
                         }
                       },
                     ),
