@@ -19,10 +19,10 @@ class _RootState extends State<Root> {
   int _currentScreen = 0;
 
   final List<Widget> _screens = [
-    const HomePage(),
-    const CartPage(),
-    const OrderHistory(),
-    const Profile(),
+    HomePage(),
+    CartPage(),
+    OrderHistory(),
+    Profile(),
   ];
 
   @override
@@ -48,6 +48,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: _screens,
         onPageChanged: (index) {
@@ -60,7 +61,11 @@ class _RootState extends State<Root> {
         height: 110.h,
         padding: EdgeInsets.only(top: 10.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50.r),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.r),
+            topRight: Radius.circular(50.r),
+          ),
+          color: AppColors.primaryColor,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),

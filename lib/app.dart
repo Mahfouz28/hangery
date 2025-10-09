@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
           debugShowCheckedModeBanner: false,
           initialRoute: Routs.splashScreen,
           onGenerateRoute: AppRouter().generateRoute,
