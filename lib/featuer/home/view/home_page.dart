@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hangery/core/routing/routs.dart';
+import 'package:hangery/core/utils/naivgators.dart';
 
 import 'package:hangery/featuer/home/widgets/card_item.dart';
 import 'package:hangery/featuer/home/widgets/catigory_list.dart';
@@ -44,7 +46,12 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 15,
                       crossAxisCount: 2,
                     ),
-                    itemBuilder: (context, index) => CardItem(),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        context.pushNamed(Routs.productDetails);
+                      },
+                      child: CardItem(),
+                    ),
                     itemCount: 11,
                   ),
                 ],

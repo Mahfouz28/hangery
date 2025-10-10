@@ -8,4 +8,5 @@ class Routs {
   static const String checkout = '/checkout';
   static const String orderHistory = '/orderHistory';
   static const String root = '/root';
+  static const String productDetails = '/productDetails';
 }
