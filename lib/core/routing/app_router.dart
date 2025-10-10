@@ -6,6 +6,7 @@ import 'package:hangery/featuer/cart/view/cart_page.dart';
 import 'package:hangery/featuer/cheakout/view/checkou_page.dart';
 import 'package:hangery/featuer/home/view/home_page.dart';
 import 'package:hangery/featuer/order_history.dart/view/order_history.dart';
+import 'package:hangery/featuer/prouduct_details/view/prouduct_details.dart';
 import 'package:hangery/root.dart';
 import 'package:hangery/splash_screen.dart';
 
@@ -29,6 +30,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CheckouPage());
       case Routs.orderHistory:
         return MaterialPageRoute(builder: (_) => OrderHistory());
+
+      case Routs.productDetails:
+        return MaterialPageRoute(builder: (_) => ProuductDetails());
+
       case Routs.root:
         return MaterialPageRoute(builder: (_) => Root());
 
