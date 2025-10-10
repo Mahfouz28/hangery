@@ -46,9 +46,7 @@ class ProuductDetails extends StatelessWidget {
                     return ToppingCard(
                       name: 'Tomato',
                       image: 'assets/images/tomato.png',
-                      onAdd: () {
-                        print('Tomato added!');
-                      },
+                      onAdd: () {},
                     );
                   },
                   separatorBuilder: (_, __) => SizedBox(width: 10.w),
