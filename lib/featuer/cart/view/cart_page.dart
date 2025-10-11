@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hangery/core/constant/app_colors.dart';
-import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 
 import 'package:hangery/featuer/cart/widgets/item_card.dart';
 import 'package:hangery/featuer/cart/widgets/show_total.dart';
