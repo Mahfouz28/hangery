@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/constant/app_colors.dart';
+import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
+import 'package:hangery/core/utils/naivgators.dart';
 
 class ShowTotal extends StatelessWidget {
   const ShowTotal({super.key});
@@ -36,7 +38,9 @@ class ShowTotal extends StatelessWidget {
           height: 70.h,
           width: 200.w,
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(Routs.checkout);
+          },
           text: 'Checkout',
           backGroundColor: AppColors.primaryColor,
           fontSize: 18.sp,
