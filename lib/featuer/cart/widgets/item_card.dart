@@ -17,57 +17,69 @@ class _ItemCardState extends State<ItemCard> {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+      elevation: 6,
+      shadowColor: Colors.black.withOpacity(0.08),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.r)),
       child: Padding(
-        padding: EdgeInsets.all(12.0.r),
+        padding: EdgeInsets.all(14.0.r),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('assets/images/Cheeseburger.png', scale: 4),
-                10.verticalSpace,
-                Text(
-                  'Cheeseburger',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  '\$5.99',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.r),
+              child: Image.asset(
+                'assets/images/Cheeseburger.png',
+                height: 80.h,
+                width: 80.w,
+                fit: BoxFit.cover,
+              ),
             ),
-            const Spacer(),
+            14.horizontalSpace,
+
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Cheeseburger',
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  6.verticalSpace,
+                  Text(
+                    'Juicy beef, cheddar cheese, and soft buns.',
+                    style: TextStyle(fontSize: 13.sp, color: Colors.grey[600]),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  10.verticalSpace,
+                  Text(
+                    '\$5.99',
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton.filled(
-                      style: IconButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                      ),
-                      color: Colors.white,
-                      onPressed: () {
+                    _buildIconButton(
+                      icon: Icons.remove,
+                      onTap: () {
                         setState(() {
-                          count++;
+                          if (count > 0) count--;
                         });
                       },
-                      icon: const Icon(Icons.add),
                     ),
                     10.horizontalSpace,
                     Text(
@@ -78,36 +90,28 @@ class _ItemCardState extends State<ItemCard> {
                       ),
                     ),
                     10.horizontalSpace,
-                    IconButton.filled(
-                      style: IconButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                      ),
-                      color: Colors.white,
-                      onPressed: () {
+                    _buildIconButton(
+                      icon: Icons.add,
+                      onTap: () {
                         setState(() {
-                          if (count > 0) count--;
+                          count++;
                         });
                       },
-                      icon: const Icon(Icons.remove),
                     ),
                   ],
                 ),
-                20.verticalSpace,
-
-                CustomTextBotton(
-                  height: 43.h,
-                  width: 154.w,
-                  color: Colors.white,
+                18.verticalSpace,
+                CustomTextButton(
+                  height: 40.h,
+                  width: 120.w,
+                  textColor: Colors.white,
                   onPressed: () {
                     setState(() {
                       count = 0;
                     });
                   },
                   text: 'Remove',
-                  backGroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.primaryColor,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -115,6 +119,32 @@ class _ItemCardState extends State<ItemCard> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildIconButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8.r),
+      child: Container(
+        height: 34.h,
+        width: 34.w,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(8.r),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryColor.withOpacity(0.2),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(icon, color: Colors.white, size: 18.sp),
       ),
     );
   }

@@ -15,6 +15,9 @@ class AppTextFeild extends StatefulWidget {
   final Color? fillColor;
   final String? labelText;
 
+  final Color? labelColor;
+  final Color? hintColor;
+
   const AppTextFeild({
     super.key,
     this.hintText,
@@ -28,6 +31,8 @@ class AppTextFeild extends StatefulWidget {
     this.validator,
     this.labelText,
     this.fillColor,
+    this.labelColor,
+    this.hintColor,
   });
 
   @override
@@ -54,7 +59,7 @@ class _AppTextFeildState extends State<AppTextFeild> {
     return TextFormField(
       cursorColor: AppColors.primaryColor,
       style: TextStyle(
-        color: AppColors.primaryColor,
+        color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 20.sp,
       ),
@@ -69,16 +74,23 @@ class _AppTextFeildState extends State<AppTextFeild> {
         fillColor: widget.fillColor ?? Colors.black12,
         filled: true,
         labelText: widget.labelText,
-        labelStyle: TextStyle(color: Colors.black87, fontSize: 20.sp),
+        labelStyle: TextStyle(
+          color: widget.labelColor ?? Colors.white,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w600,
+        ),
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 18.sp),
+        hintStyle: TextStyle(
+          color: widget.hintColor ?? Colors.white70,
+          fontSize: 18.sp,
+        ),
         suffixIconColor: AppColors.primaryColor,
 
         suffixIcon: widget.obscureText == true
             ? IconButton(
                 icon: Icon(
                   isObscure ? Icons.visibility_off : Icons.visibility,
-                  color: AppColors.primaryColor,
+                  color: Colors.white,
                 ),
                 onPressed: toggleObscureText,
               )
@@ -86,11 +98,11 @@ class _AppTextFeildState extends State<AppTextFeild> {
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.grey, width: 2),
+          borderSide: const BorderSide(color: Colors.white, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.grey, width: 2),
+          borderSide: const BorderSide(color: Colors.white, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

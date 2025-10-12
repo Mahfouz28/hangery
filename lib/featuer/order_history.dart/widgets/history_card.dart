@@ -51,14 +51,14 @@ class HistoryCard extends StatelessWidget {
               ],
             ),
             20.verticalSpace,
-            CustomTextBotton(
+            CustomTextButton(
               text: 'Order Again',
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
 
               onPressed: () {},
-              backGroundColor: Colors.grey,
-              color: Colors.white,
+              backgroundColor: Colors.grey,
+              textColor: Colors.white,
             ),
           ],
         ),

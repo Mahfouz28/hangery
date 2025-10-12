@@ -19,10 +19,10 @@ class _RootState extends State<Root> {
   int _currentScreen = 0;
 
   final List<Widget> _screens = [
-    HomePage(),
-    CartPage(),
-    OrderHistory(),
-    Profile(),
+    const HomePage(),
+    const CartPage(),
+    const OrderHistory(),
+    const Profile(),
   ];
 
   @override
@@ -38,72 +38,76 @@ class _RootState extends State<Root> {
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _currentScreen = index;
-    });
     _pageController.jumpToPage(index);
+    setState(() => _currentScreen = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: _screens,
-        onPageChanged: (index) {
-          setState(() {
-            _currentScreen = index;
-          });
-        },
+        onPageChanged: (index) => setState(() => _currentScreen = index),
       ),
       bottomNavigationBar: Container(
-        height: 110.h,
-        padding: EdgeInsets.only(top: 10.h),
+        height: 105.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50.r),
-            topRight: Radius.circular(50.r),
-          ),
           color: AppColors.primaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40.r),
+            topRight: Radius.circular(40.r),
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.12),
               blurRadius: 10,
-              offset: const Offset(0, -2),
+              offset: const Offset(0, -3),
             ),
           ],
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50.r),
-            topRight: Radius.circular(50.r),
+            topLeft: Radius.circular(40.r),
+            topRight: Radius.circular(40.r),
           ),
-          child: BottomNavigationBar(
-            backgroundColor: AppColors.primaryColor,
-            currentIndex: _currentScreen,
-            onTap: _onItemTapped,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white.withOpacity(0.5),
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.shopping_cart),
-                label: 'Cart',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.local_restaurant_sharp),
-                label: 'Orders',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.profile_circled),
-                label: 'profile',
-              ),
-            ],
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: BottomNavigationBar(
+              backgroundColor: AppColors.primaryColor,
+              currentIndex: _currentScreen,
+              onTap: _onItemTapped,
+              elevation: 0,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white.withOpacity(0.6),
+              selectedFontSize: 14.sp,
+              unselectedFontSize: 13.sp,
+              showUnselectedLabels: true,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.cart),
+                  label: 'Cart',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.receipt_long_outlined),
+                  label: 'Orders',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.person_crop_circle),
+                  label: 'Profile',
+                ),
+              ],
+            ),
           ),
         ),
       ),

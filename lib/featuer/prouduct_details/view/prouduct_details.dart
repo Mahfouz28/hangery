@@ -97,13 +97,13 @@ class ProuductDetails extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  CustomTextBotton(
+                  CustomTextButton(
                     height: 70.h,
                     width: 200.w,
-                    color: Colors.white,
+                    textColor: Colors.white,
                     onPressed: () {},
                     text: 'Add to Cart',
-                    backGroundColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.primaryColor,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),

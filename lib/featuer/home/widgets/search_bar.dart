@@ -7,28 +7,31 @@ class HomeSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.white,
+      elevation: 4,
       borderRadius: BorderRadius.circular(20.r),
-
-      elevation: 5,
+      shadowColor: Colors.black12,
       child: TextField(
+        textInputAction: TextInputAction.search,
+        cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.search),
-          hintText: 'Search food',
+          prefixIcon: Icon(Icons.search, color: Colors.grey.shade600),
+          hintText: 'Search food...',
+          hintStyle: TextStyle(fontSize: 16.sp, color: Colors.grey.shade500),
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(20.r),
-          ),
-          focusedBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(20.r),
           ),
           filled: true,
           fillColor: Colors.white,
           contentPadding: EdgeInsets.symmetric(
-            vertical: 15.h,
-            horizontal: 20.w,
+            vertical: 14.h,
+            horizontal: 16.w,
           ),
         ),
+        onSubmitted: (value) {
+          // TODO: Handle search logic (can trigger Bloc event or navigation)
+        },
       ),
     );
   }

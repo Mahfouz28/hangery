@@ -10,43 +10,58 @@ class ShowTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Text(
-              'Total',
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.07),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Total',
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[700],
+                ),
               ),
-            ),
-
-            Text(
-              '\$25.99',
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+              5.verticalSpace,
+              Text(
+                '\$25.99',
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primaryColor,
+                ),
               ),
-            ),
-          ],
-        ),
-        const Spacer(),
-        CustomTextBotton(
-          height: 70.h,
-          width: 200.w,
-          color: Colors.white,
-          onPressed: () {
-            context.pushNamed(Routs.checkout);
-          },
-          text: 'Checkout',
-          backGroundColor: AppColors.primaryColor,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-      ],
+            ],
+          ),
+          const Spacer(),
+          CustomTextButton(
+            height: 60.h,
+            width: 170.w,
+            textColor: Colors.white,
+            onPressed: () {
+              context.pushNamed(Routs.checkout);
+            },
+            text: 'Checkout',
+            backgroundColor: AppColors.primaryColor,
+            fontSize: 17.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ],
+      ),
     );
   }
 }

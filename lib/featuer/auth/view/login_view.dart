@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/sheard/widgets/app_text_feild.dart';
@@ -8,93 +8,171 @@ import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 import 'package:hangery/core/utils/naivgators.dart';
 
-// ignore: must_be_immutable
 class LoginView extends StatelessWidget {
   LoginView({super.key});
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: SingleChildScrollView(
-        child: Center(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 30.h),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                150.verticalSpace,
-                SvgPicture.asset('assets/svg/Hungry_.svg'),
+                60.verticalSpace,
+
+                SvgPicture.asset('assets/svg/Hungry_.svg', height: 120.h),
+
+                16.verticalSpace,
+
+                CoustomText(
+                  text: 'Welcome Back ',
+                  color: Colors.white,
+                  fontSize: 26.sp,
+                  fontWeight: FontWeight.bold,
+                ),
                 8.verticalSpace,
                 CoustomText(
-                  text: 'Welcom Back , descover the fast food',
-                  color: Colors.white,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  text: 'Discover the fastest way to order your food',
+                  color: Colors.white70,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
                 ),
-                90.verticalSpace,
+
+                60.verticalSpace,
+
                 Form(
                   key: formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppTextFeild(
-                        controller: emailController,
-                        suffixIcon: Icon(Icons.email_outlined),
+                        labelColor: Colors.white,
+                        hintColor: Colors.grey,
 
-                        fillColor: Colors.white,
+                        controller: emailController,
                         labelText: 'Email',
-                        hintText: 'exampil@.com',
+                        hintText: 'example@email.com',
+                        fillColor: Colors.transparent,
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
+                        suffixIcon: Icon(
+                          Icons.email_outlined,
+                          color: AppColors.primaryColor,
+                        ),
+
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your email';
+                        //   }
+                        //   if (!value.contains('@')) {
+                        //     return 'Enter a valid email';
+                        //   }
+                        //   return null;
+                        // },
                       ),
                       22.verticalSpace,
-                      AppTextFeild(
-                        controller: passwordController,
-                        suffixIcon: Icon(Icons.remove_red_eye_outlined),
 
-                        fillColor: Colors.white,
+                      AppTextFeild(
+                        labelColor: Colors.white,
+                        hintColor: Colors.grey,
+                        controller: passwordController,
                         labelText: 'Password',
-                        hintText: '***********',
+                        hintText: '********',
+                        fillColor: Colors.transparent,
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
+
+                        suffixIcon: Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Colors.white,
+                        ),
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your password';
+                        //   }
+                        //   if (value.length < 6) {
+                        //     return 'Password must be at least 6 characters';
+                        //   }
+                        //   return null;
+                        // },
                       ),
-                      40.verticalSpace,
-                      CustomTextBotton(
-                        backGroundColor: Colors.white,
+
+                      /// Forgot Password
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: CoustomText(
+                            text: 'Forgot Password?',
+                            color: Colors.white70,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+
+                      30.verticalSpace,
+
+                      CustomTextButton(
+                        backgroundColor: Colors.white,
                         text: 'Login',
-                        color: AppColors.primaryColor,
+                        textColor: AppColors.primaryColor,
                         fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            print('Login button pressed');
                             context.pushNamedAndRemoveUntil(Routs.root);
                           }
                         },
                       ),
-                      22.verticalSpace,
-                      TextButton(
-                        onPressed: () {
-                          context.pushNamed(Routs.signUp);
-                        },
-                        child: CoustomText(
-                          text: 'Create new account',
-                          color: Colors.white,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
+
+                      30.verticalSpace,
+
+                      /// Divider or "Or" line
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(color: Colors.white24, thickness: 1),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: CoustomText(
+                              text: 'or',
+                              color: Colors.white70,
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(color: Colors.white24, thickness: 1),
+                          ),
+                        ],
+                      ),
+
+                      30.verticalSpace,
+
+                      /// 👤 Create Account
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CoustomText(
+                            text: "Don't have an account? ",
+                            color: Colors.white70,
+                            fontSize: 15.sp,
+                          ),
+                          GestureDetector(
+                            onTap: () => context.pushNamed(Routs.signUp),
+                            child: CoustomText(
+                              text: 'Sign Up',
+                              color: Colors.white,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

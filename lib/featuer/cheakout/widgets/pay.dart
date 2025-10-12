@@ -33,10 +33,10 @@ class Pay extends StatelessWidget {
           ],
         ),
         Spacer(),
-        CustomTextBotton(
+        CustomTextButton(
           height: 70.h,
           width: 200.w,
-          color: Colors.white,
+          textColor: Colors.white,
           onPressed: () {
             showAdaptiveDialog(
               context: context,
@@ -117,7 +117,7 @@ class Pay extends StatelessWidget {
             );
           },
           text: 'Pay Now',
-          backGroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.primaryColor,
           fontSize: 18.sp,
           fontWeight: FontWeight.w600,
         ),
