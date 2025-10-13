@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/featuer/order_history.dart/widgets/history_card.dart';
 
 class OrderHistory extends StatelessWidget {
@@ -8,6 +9,8 @@ class OrderHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
+      extendBody: true,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 26.r, vertical: 26.r),

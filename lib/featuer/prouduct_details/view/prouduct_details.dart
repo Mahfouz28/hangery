@@ -13,103 +13,153 @@ class ProuductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
-              ),
-
-              const CustomizeUrOrder(),
-              40.verticalSpace,
-
-              CoustomText(
-                text: 'Toppings',
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                color: const Color(0xff3C2F2F),
-              ),
-              30.verticalSpace,
-
-              SizedBox(
-                height: 120.h,
-                child: ListView.separated(
-                  clipBehavior: Clip.none,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return ToppingCard(
-                      name: 'Tomato',
-                      image: 'assets/images/tomato.png',
-                      onAdd: () {},
-                    );
-                  },
-                  separatorBuilder: (_, __) => SizedBox(width: 10.w),
-                  itemCount: 6,
-                ),
-              ),
-              30.verticalSpace,
-              CoustomText(
-                text: 'Side options',
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                color: const Color(0xff3C2F2F),
-              ),
-              30.verticalSpace,
-              SizedBox(
-                height: 120.h,
-                child: ListView.separated(
-                  clipBehavior: Clip.none,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => SideOptionCard(
-                    name: 'Fries',
-                    image: 'assets/images/fries.png',
-                    onAdd: () {},
-                  ),
-                  separatorBuilder: (_, __) => SizedBox(width: 10.w),
-                  itemCount: 6,
-                ),
-              ),
-              40.verticalSpace,
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      CoustomText(
-                        text: 'Total Price',
-                        fontSize: 18.sp,
-                        color: const Color(0xff3C2F2F),
-                        fontWeight: FontWeight.w600,
+      body: Container(
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          // gradient: LinearGradient(
+          //   colors: [
+          //     AppColors.primaryColor.withOpacity(0.9),
+          //     AppColors.primaryColor.withOpacity(0.7),
+          //   ],
+          //   begin: Alignment.topCenter,
+          //   end: Alignment.bottomCenter,
+          // ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 22.sp,
                       ),
-                      10.verticalSpace,
-                      CoustomText(
-                        text: '\$12.00',
-                        fontSize: 22.sp,
-                        color: const Color(0xff3C2F2F),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: CoustomText(
+                          text: 'Product Details',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 48),
+                  ],
+                ),
+                25.verticalSpace,
+                Container(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                  child: const CustomizeUrOrder(),
+                ),
+                35.verticalSpace,
+                CoustomText(
+                  text: 'Toppings',
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                20.verticalSpace,
+                SizedBox(
+                  height: 120.h,
+                  child: ListView.separated(
+                    clipBehavior: Clip.none,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return ToppingCard(
+                        name: 'Tomato',
+                        image: 'assets/images/tomato.png',
+                        onAdd: () {},
+                      );
+                    },
+                    separatorBuilder: (_, __) => SizedBox(width: 12.w),
+                    itemCount: 6,
+                  ),
+                ),
+                35.verticalSpace,
+                CoustomText(
+                  text: 'Side Options',
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                20.verticalSpace,
+                SizedBox(
+                  height: 120.h,
+                  child: ListView.separated(
+                    clipBehavior: Clip.none,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => SideOptionCard(
+                      name: 'Fries',
+                      image: 'assets/images/fries.png',
+                      onAdd: () {},
+                    ),
+                    separatorBuilder: (_, __) => SizedBox(width: 12.w),
+                    itemCount: 6,
+                  ),
+                ),
+                40.verticalSpace,
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 20.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CoustomText(
+                            text: 'Total Price',
+                            fontSize: 16.sp,
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          8.verticalSpace,
+                          CoustomText(
+                            text: '\$12.00',
+                            fontSize: 22.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      CustomTextButton(
+                        height: 60.h,
+                        width: 180.w,
+                        textColor: AppColors.primaryColor,
+                        onPressed: () {},
+                        text: 'Add to Cart',
+                        backgroundColor: Colors.white,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
+                        borderRadius: 12.r,
                       ),
                     ],
                   ),
-                  const Spacer(),
-                  CustomTextButton(
-                    height: 70.h,
-                    width: 200.w,
-                    textColor: Colors.white,
-                    onPressed: () {},
-                    text: 'Add to Cart',
-                    backgroundColor: AppColors.primaryColor,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ],
-              ),
-            ],
+                ),
+                15.verticalSpace,
+              ],
+            ),
           ),
         ),
       ),

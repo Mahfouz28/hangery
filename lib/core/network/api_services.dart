@@ -1,0 +1,46 @@
+import 'package:dio/dio.dart';
+import 'package:hangery/core/network/api_excpetoins.dart';
+import 'package:hangery/core/network/dio_client.dart';
+
+class ApiServices {
+  final DioClient dioClient = DioClient();
+  //get
+  Future<dynamic> get(String endPoint) async {
+    try {
+      final response = await dioClient.dio.get(endPoint);
+      return response.data;
+    } on DioException catch (e) {
+      return ApiExcpetoins.handleError(e);
+    }
+  }
+
+  //post
+  Future<dynamic> post(String endPoint, Map<String, dynamic> data) async {
+    try {
+      final response = await dioClient.dio.post(endPoint, data: data);
+      return response.data;
+    } on DioException catch (e) {
+      return ApiExcpetoins.handleError(e);
+    }
+  }
+
+  //put
+  Future<dynamic> put(String endPoint, Map<String, dynamic> data) async {
+    try {
+      final response = await dioClient.dio.put(endPoint, data: data);
+      return response.data;
+    } on DioException catch (e) {
+      return ApiExcpetoins.handleError(e);
+    }
+  }
+
+  //delete
+  Future<dynamic> delete(String endPoint) async {
+    try {
+      final response = await dioClient.dio.delete(endPoint);
+      return response.data;
+    } on DioException catch (e) {
+      return ApiExcpetoins.handleError(e);
+    }
+  }
+}

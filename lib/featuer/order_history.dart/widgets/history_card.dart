@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 
 class HistoryCard extends StatelessWidget {
@@ -8,42 +9,54 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      elevation: 6,
+      shadowColor: Colors.black12,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
       color: Colors.white,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 13.0.r, vertical: 13.r),
+        padding: EdgeInsets.all(14.r),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Image.asset(
-                  'assets/images/Cheeseburger.png',
-                  width: 100,
-                  height: 100,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12.r),
+                  child: Image.asset(
+                    'assets/images/Cheeseburger.png',
+                    width: 90.w,
+                    height: 90.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                30.horizontalSpace,
+                20.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Cheese Burger',
+                      'Cheeseburger',
                       style: TextStyle(
                         fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
                       ),
                     ),
+                    5.verticalSpace,
                     Text(
-                      'Qyt: X3',
+                      'Qty: x3',
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
+                        color: Colors.grey[600],
                       ),
                     ),
+                    5.verticalSpace,
                     Text(
                       'Total: \$25.00',
                       style: TextStyle(
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                   ],
@@ -52,13 +65,14 @@ class HistoryCard extends StatelessWidget {
             ),
             20.verticalSpace,
             CustomTextButton(
+              height: 50.h,
+              width: double.infinity,
               text: 'Order Again',
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-
-              onPressed: () {},
-              backgroundColor: Colors.grey,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
+              backgroundColor: AppColors.primaryColor,
               textColor: Colors.white,
+              onPressed: () {},
             ),
           ],
         ),

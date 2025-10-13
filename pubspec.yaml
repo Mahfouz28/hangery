@@ -38,6 +38,9 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_svg: ^2.2.1
   liquid_glass_renderer: ^0.1.1-dev.17
+  dio: ^5.9.0
+  shared_preferences: ^2.5.3
+  pretty_dio_logger: ^1.4.0
 
 dev_dependencies:
   flutter_test:

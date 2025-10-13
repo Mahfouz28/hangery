@@ -13,42 +13,70 @@ class _SpicySliderState extends State<SpicySlider> {
 
   @override
   Widget build(BuildContext context) {
+    // Gradient for the active track
+    final gradient = const LinearGradient(
+      colors: [
+        Colors.blueAccent, // Cold 🧊
+        Colors.greenAccent,
+        Colors.orange,
+        Colors.red, // Hot 🌶️
+      ],
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Text(
-            'Spicy',
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            'Spiciness Level',
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
           ),
         ),
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            activeTrackColor: Colors.green.shade900,
-            thumbColor: Colors.green.shade900,
-            overlayColor: Colors.green.withOpacity(0.2),
-            trackHeight: 6.h,
-          ),
-          child: SizedBox(
-            width: 290.w,
-            child: Slider(
-              value: _spicyValue,
-              onChanged: (value) {
-                setState(() {
-                  _spicyValue = value;
-                });
-              },
+        6.verticalSpace,
+        ShaderMask(
+          shaderCallback: (Rect bounds) {
+            return gradient.createShader(bounds);
+          },
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackHeight: 6.h,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
+              overlayColor: Colors.transparent,
+              inactiveTrackColor: Colors.grey.shade300,
+            ),
+            child: SizedBox(
+              width: 290.w,
+              child: Slider(
+                value: _spicyValue,
+                min: 0,
+                max: 1,
+                divisions: 10,
+                thumbColor:
+                    gradient.colors[(_spicyValue * (gradient.colors.length - 1))
+                        .round()],
+                onChanged: (value) {
+                  setState(() {
+                    _spicyValue = value;
+                  });
+                },
+              ),
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18.0),
+          padding: EdgeInsets.symmetric(horizontal: 18.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('🥶', style: TextStyle(fontSize: 16.sp)),
-              Text('🌶️', style: TextStyle(fontSize: 16.sp)),
+              Text(
+                '🥶 Mild',
+                style: TextStyle(fontSize: 13.sp, color: Colors.blue),
+              ),
+              Text(
+                '🌶️ Hot',
+                style: TextStyle(fontSize: 13.sp, color: Colors.red),
+              ),
             ],
           ),
         ),

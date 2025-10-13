@@ -50,6 +50,9 @@ class CustomTextButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textScaler: TextScaler.linear(1.0),
           text,
           style: TextStyle(
             color: textColor ?? Colors.white,
