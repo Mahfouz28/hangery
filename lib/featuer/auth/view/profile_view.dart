@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/constant/app_colors.dart';
+import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/sheard/widgets/app_text_feild.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
+import 'package:hangery/core/utils/naivgators.dart';
+import 'package:hangery/featuer/auth/widgets/pyment.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -91,6 +94,9 @@ class Profile extends StatelessWidget {
                 obscureText: true,
               ),
               35.verticalSpace,
+              Payment(),
+              30.verticalSpace,
+
               Row(
                 children: [
                   Expanded(
@@ -106,10 +112,13 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   12.horizontalSpace,
+
                   Expanded(
                     child: CustomTextButton(
                       text: 'Log Out',
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushReplacementNamed(Routs.loginView);
+                      },
                       height: 65.h,
                       textColor: Colors.white,
                       fontSize: 18.sp,

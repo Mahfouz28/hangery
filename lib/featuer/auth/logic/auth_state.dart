@@ -1,0 +1,20 @@
+part of 'auth_cubit.dart';
+
+abstract class AuthState {}
+
+class AuthInitial extends AuthState {}
+
+class AuthLoading extends AuthState {}
+
+class AuthSuccess extends AuthState {
+  final UserModel user;
+  final String message;
+
+  AuthSuccess({required this.user, required this.message});
+}
+
+class AuthError extends AuthState {
+  final String error;
+
+  AuthError({required this.error});
+}

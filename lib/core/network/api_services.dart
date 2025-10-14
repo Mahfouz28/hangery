@@ -4,43 +4,44 @@ import 'package:hangery/core/network/dio_client.dart';
 
 class ApiServices {
   final DioClient dioClient = DioClient();
-  //get
+
+  // GET
   Future<dynamic> get(String endPoint) async {
     try {
       final response = await dioClient.dio.get(endPoint);
       return response.data;
     } on DioException catch (e) {
-      return ApiExcpetoins.handleError(e);
+      throw ApiExcpetoins.handleError(e);
     }
   }
 
-  //post
+  // POST
   Future<dynamic> post(String endPoint, Map<String, dynamic> data) async {
     try {
       final response = await dioClient.dio.post(endPoint, data: data);
       return response.data;
     } on DioException catch (e) {
-      return ApiExcpetoins.handleError(e);
+      throw ApiExcpetoins.handleError(e);
     }
   }
 
-  //put
+  // PUT
   Future<dynamic> put(String endPoint, Map<String, dynamic> data) async {
     try {
       final response = await dioClient.dio.put(endPoint, data: data);
       return response.data;
     } on DioException catch (e) {
-      return ApiExcpetoins.handleError(e);
+      throw ApiExcpetoins.handleError(e);
     }
   }
 
-  //delete
+  // DELETE
   Future<dynamic> delete(String endPoint) async {
     try {
       final response = await dioClient.dio.delete(endPoint);
       return response.data;
     } on DioException catch (e) {
-      return ApiExcpetoins.handleError(e);
+      throw ApiExcpetoins.handleError(e);
     }
   }
 }
