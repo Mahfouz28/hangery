@@ -24,4 +24,6 @@ class UserModel {
       address: json['address'] ?? '',
     );
   }
+
+  void operator [](String other) {}
 }

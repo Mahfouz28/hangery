@@ -3,13 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 
 class Payment extends StatefulWidget {
-  const Payment({super.key});
+  final String text;
+
+  const Payment({super.key, required this.text});
 
   @override
   State<Payment> createState() => _PaymentMethodesState();
 }
 
 class _PaymentMethodesState extends State<Payment> {
+  late final String text;
+
+  @override
+  void initState() {
+    super.initState();
+    text = widget.text;
+  }
+
   int selectedPayment = 1;
   bool saveCard = false;
   @override
@@ -24,7 +34,7 @@ class _PaymentMethodesState extends State<Payment> {
         fontWeight: FontWeight.w500,
       ),
       subtitle: CoustomText(
-        text: '**** **** **** 1234',
+        text: text,
         color: Colors.white,
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,

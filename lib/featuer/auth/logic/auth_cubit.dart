@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hangery/featuer/auth/data/auth_repo.dart';
 import 'package:hangery/featuer/auth/data/auth_model.dart';
 
-part 'auth_State.dart';
+part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepo _authRepo;

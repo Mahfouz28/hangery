@@ -49,7 +49,7 @@ class AuthRepo {
     }
   }
 
-  /// ---------------------------- REGISTER ----------------------------
+  /// ---------------------------- REGISTER -------------------------
   Future<UserModel> register({
     required String name,
     required String email,
@@ -88,6 +88,82 @@ class AuthRepo {
       rethrow;
     } catch (e) {
       throw ApiError(message: 'Unexpected error, please try again later.');
+    }
+  }
+
+  /// ----------------------------GET profile Data --------------------
+  Future<UserModel> getProfilrData() async {
+    try {
+      final response = await apiServices.get('/profile');
+      print('✅ Profile update response: $response');
+      if (response is Map && response.containsKey('message')) {
+        print('✅ Server message: ${response['message']}');
+      }
+      return UserModel.fromJson(response['data']);
+    } on DioError catch (e) {
+      ApiExcpetoins.handleError(e);
+    } catch (e) {
+      throw ApiError(message: e.toString());
+    }
+    throw ApiError(message: 'Failed to get profile data.');
+  }
+
+  /// ----------------------------Update Profile Data ----------
+  Future<void> updateProfileData({
+    required String name,
+    required String email,
+    required String address,
+    String? visa,
+    String? image,
+  }) async {
+    try {
+      final formData = FormData();
+
+      formData.fields.addAll([
+        MapEntry('name', name),
+        MapEntry('email', email),
+        MapEntry('address', address),
+        if (visa != null && visa.isNotEmpty) MapEntry('visa', visa),
+      ]);
+
+      if (image != null && image.isNotEmpty) {
+        formData.files.add(
+          MapEntry(
+            'image',
+            await MultipartFile.fromFile(
+              image,
+              filename: image.split('/').last,
+            ),
+          ),
+        );
+      }
+
+      final response = await apiServices.post('/update-profile', formData);
+
+      print('✅ Profile update response: $response');
+      if (response is Map && response.containsKey('message')) {
+        print('✅ Server message: ${response['message']}');
+      }
+    } on DioException catch (e) {
+      ApiExcpetoins.handleError(e);
+      rethrow;
+    } catch (e) {
+      throw ApiError(message: 'Failed to update profile: $e');
+    }
+  }
+
+  /// ---------------------------- LOGOUT ---------------------------
+  Future<void> logout() async {
+    try {
+      await apiServices.post('/logout', {});
+      await PrefHelpers.clearToken();
+    } on DioException catch (e) {
+      final errorMsg = ApiExcpetoins.handleError(e);
+      throw errorMsg;
+    } on ApiError {
+      rethrow;
+    } catch (e) {
+      throw ApiError(message: e.toString());
     }
   }
 }

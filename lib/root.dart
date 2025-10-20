@@ -22,7 +22,7 @@ class _RootState extends State<Root> {
     const HomePage(),
     const CartPage(),
     const OrderHistory(),
-    const Profile(),
+    Profile(),
   ];
 
   @override

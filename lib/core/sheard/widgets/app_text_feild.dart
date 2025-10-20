@@ -14,6 +14,7 @@ class AppTextFeild extends StatefulWidget {
   final String? Function(String?)? validator;
   final Color? fillColor;
   final String? labelText;
+  final bool? enabled;
 
   final Color? labelColor;
   final Color? hintColor;
@@ -33,6 +34,7 @@ class AppTextFeild extends StatefulWidget {
     this.fillColor,
     this.labelColor,
     this.hintColor,
+    this.enabled,
   });
 
   @override
@@ -57,6 +59,7 @@ class _AppTextFeildState extends State<AppTextFeild> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enabled,
       cursorColor: AppColors.primaryColor,
       style: TextStyle(
         color: Colors.white,
@@ -71,6 +74,8 @@ class _AppTextFeildState extends State<AppTextFeild> {
       obscureText: isObscure,
       validator: widget.validator,
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+
         fillColor: widget.fillColor ?? Colors.black12,
         filled: true,
         labelText: widget.labelText,
