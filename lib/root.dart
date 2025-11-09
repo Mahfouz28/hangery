@@ -19,7 +19,7 @@ class _RootState extends State<Root> {
   int _currentScreen = 0;
 
   final List<Widget> _screens = [
-    const HomePage(),
+    HomePage(),
     const CartPage(),
     const OrderHistory(),
     Profile(),

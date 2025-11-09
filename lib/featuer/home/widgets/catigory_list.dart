@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
+import 'package:hangery/core/utils/pref_helpers.dart';
 
 class CatigoryList extends StatefulWidget {
   const CatigoryList({super.key});
@@ -11,13 +12,30 @@ class CatigoryList extends StatefulWidget {
 }
 
 class _CatigoryListState extends State<CatigoryList> {
-  final List<String> categories = ['All', 'Combos', 'Sliders', 'Classic'];
+  List<String> categories = [];
   int selectedIndex = 0;
+  bool isGuest = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkUserStatus();
+  }
+
+  Future<void> _checkUserStatus() async {
+    final token = await PrefHelpers.getToken();
+    setState(() {
+      isGuest = token == null;
+      categories = isGuest
+          ? ['All', 'Popular']
+          : ['All', 'Combos', 'Sliders', 'Classic'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50.h,
+      height: 45.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),

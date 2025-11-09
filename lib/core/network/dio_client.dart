@@ -11,7 +11,6 @@ class DioClient {
   );
   DioClient() {
     _dio.interceptors.add(
-      // LogInterceptor(requestBody: true, responseBody: true, error: true),
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final token = await PrefHelpers.getToken() ?? '';

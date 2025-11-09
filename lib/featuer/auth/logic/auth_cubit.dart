@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hangery/core/utils/auth_manger.dart';
 import 'package:hangery/featuer/auth/data/auth_repo.dart';
 import 'package:hangery/featuer/auth/data/auth_model.dart';
+import 'package:hangery/core/utils/pref_helpers.dart';
 
 part 'auth_state.dart';
 
@@ -14,7 +16,10 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final user = await _authRepo.login(email: email, password: password);
 
-      emit(AuthSuccess(user: user, message: "LOGIN SUCCESSFUL"));
+      await PrefHelpers.saveToken(user.token!);
+      await AuthManager.login(user.token!);
+
+      emit(AuthSuccess(user: user, message: "Login Successful"));
     } catch (e) {
       emit(AuthError(error: e.toString()));
     }
@@ -32,9 +37,19 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         password: password,
       );
+
+      await PrefHelpers.saveToken(user.token!);
+      await AuthManager.login(user.token!);
+
       emit(AuthSuccess(user: user, message: "Registration Successful"));
     } catch (e) {
       emit(AuthError(error: e.toString()));
     }
+  }
+
+  Future<void> logout() async {
+    await PrefHelpers.clearToken();
+    await AuthManager.logout();
+    emit(AuthInitial());
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/utils/naivgators.dart';
+import 'package:hangery/core/utils/pref_helpers.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,11 +34,18 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        context.pushReplacementNamed(Routs.loginView);
-      }
-    });
+    checkLogin();
+  }
+
+  Future<void> checkLogin() async {
+    final token = await PrefHelpers.getToken();
+    await Future.delayed(const Duration(seconds: 2)); // splash delay
+
+    if (token != null && token.isNotEmpty) {
+      context.pushReplacementNamed(Routs.root);
+    } else {
+      context.pushReplacementNamed(Routs.loginView);
+    }
   }
 
   @override
@@ -56,14 +64,11 @@ class _SplashScreenState extends State<SplashScreen>
           bottom: false,
           child: SizedBox(
             width: double.infinity,
-
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-
               children: [
                 290.verticalSpace,
-
                 SvgPicture.asset('assets/svg/Hungry_.svg', height: 55.h),
                 const Spacer(),
                 Image.asset('assets/images/splashImage.png', height: 250.h),

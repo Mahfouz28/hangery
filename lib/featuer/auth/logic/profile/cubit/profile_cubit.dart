@@ -29,7 +29,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  /// -------------------- Image Picker -------------------
   Future<void> imagePicker() async {
     final picker = ImagePicker();
     try {
@@ -51,7 +50,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   void clearPickedImage() {
     pickedImagePath = null;
     localImagePath = null;
-    imageRemoved = true; // Mark it as removed
+    imageRemoved = true;
     if (state is ProfileSuccess) {
       final user = (state as ProfileSuccess).userModel;
       final updatedUser = UserModel(

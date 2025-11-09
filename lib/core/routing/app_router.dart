@@ -7,6 +7,7 @@ import 'package:hangery/featuer/auth/view/login_view.dart';
 import 'package:hangery/featuer/auth/view/sign_up_view.dart';
 import 'package:hangery/featuer/cart/view/cart_page.dart';
 import 'package:hangery/featuer/cheakout/view/checkou_page.dart';
+import 'package:hangery/featuer/home/logic/cubit/product_cubit.dart';
 import 'package:hangery/featuer/home/view/home_page.dart';
 import 'package:hangery/featuer/order_history.dart/view/order_history.dart';
 import 'package:hangery/featuer/prouduct_details/view/prouduct_details.dart';
@@ -36,7 +37,12 @@ class AppRouter {
           ),
         );
       case Routs.homePage:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ProductCubit()..getAllProduct(),
+            child: HomePage(),
+          ),
+        );
 
       case Routs.cart:
         return MaterialPageRoute(builder: (_) => CartPage());
@@ -49,7 +55,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ProuductDetails());
 
       case Routs.root:
-        return MaterialPageRoute(builder: (_) => Root());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ProductCubit()..getAllProduct(),
+            child: Root(),
+          ),
+        );
 
       default:
         return MaterialPageRoute(builder: (_) => Text('Error'));

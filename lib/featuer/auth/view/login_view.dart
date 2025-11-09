@@ -133,30 +133,43 @@ class LoginView extends StatelessWidget {
                             ),
                           ),
                           30.verticalSpace,
-                          isLoading
-                              ? CircularProgressIndicator(color: Colors.white)
-                              : CustomTextButton(
-                                  backgroundColor: Colors.white,
-                                  text: 'Login',
-                                  textColor: AppColors.primaryColor,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
+                          Row(
+                            children: [
+                              isLoading
+                                  ? CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : Expanded(
+                                      child: CustomTextButton(
+                                        backgroundColor: Colors.white,
+                                        text: 'Login',
+                                        textColor: AppColors.primaryColor,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.bold,
+                                        onPressed: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            context.read<AuthCubit>().login(
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ),
+                              20.horizontalSpace,
+                              Expanded(
+                                child: CustomTextButton(
+                                  width: 200,
+                                  text: 'Guest',
                                   onPressed: () {
-                                    if (formKey.currentState!.validate()) {
-                                      context.read<AuthCubit>().login(
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                      );
-                                    }
-
-                                    // if (formKey.currentState!.validate()) {
-                                    //   context.read<AuthCubit>().login(
-                                    //     email: emailController.text,
-                                    //     password: passwordController.text,
-                                    //   );
-                                    // }
+                                    context.pushNamed(Routs.root);
                                   },
+                                  backgroundColor: Colors.blueAccent,
                                 ),
+                              ),
+                            ],
+                          ),
                           30.verticalSpace,
                           Row(
                             children: [

@@ -7,10 +7,12 @@ import 'package:hangery/core/network/api_services.dart';
 import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/sheard/widgets/app_text_feild.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
+import 'package:hangery/core/utils/auth_manger.dart';
 import 'package:hangery/core/utils/naivgators.dart';
 import 'package:hangery/core/utils/snacbar_helper.dart';
 import 'package:hangery/featuer/auth/data/auth_repo.dart';
 import 'package:hangery/featuer/auth/logic/profile/cubit/profile_cubit.dart';
+import 'package:hangery/featuer/auth/widgets/profile_guset.dart';
 import 'package:hangery/featuer/auth/widgets/pyment.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -24,6 +26,9 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!AuthManager.isLoggedIn) {
+      return GuestProfile();
+    }
     return BlocProvider(
       create: (context) =>
           ProfileCubit(AuthRepo(ApiServices()))..getProfileData(),
