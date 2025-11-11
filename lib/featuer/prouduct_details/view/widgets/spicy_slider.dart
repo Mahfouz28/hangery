@@ -30,7 +30,11 @@ class _SpicySliderState extends State<SpicySlider> {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Text(
             'Spiciness Level',
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.red.shade300,
+            ),
           ),
         ),
         6.verticalSpace,

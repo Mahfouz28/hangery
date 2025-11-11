@@ -15,7 +15,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -142,7 +142,10 @@ class _HomePageState extends State<HomePage> {
                                 if (token == null) {
                                   _showGuestDialog(context);
                                 } else {
-                                  context.pushNamed(Routs.productDetails);
+                                  context.pushNamed(
+                                    Routs.productDetails,
+                                    arguments: product,
+                                  );
                                 }
                               },
                               child: CardItem(

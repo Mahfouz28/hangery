@@ -7,9 +7,11 @@ import 'package:hangery/featuer/auth/view/login_view.dart';
 import 'package:hangery/featuer/auth/view/sign_up_view.dart';
 import 'package:hangery/featuer/cart/view/cart_page.dart';
 import 'package:hangery/featuer/cheakout/view/checkou_page.dart';
+import 'package:hangery/featuer/home/data/product_model.dart';
 import 'package:hangery/featuer/home/logic/cubit/product_cubit.dart';
 import 'package:hangery/featuer/home/view/home_page.dart';
 import 'package:hangery/featuer/order_history.dart/view/order_history.dart';
+import 'package:hangery/featuer/prouduct_details/logic/cubit/product_details_cubit.dart';
 import 'package:hangery/featuer/prouduct_details/view/prouduct_details.dart';
 import 'package:hangery/core/network/api_services.dart';
 import 'package:hangery/root.dart';
@@ -52,7 +54,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => OrderHistory());
 
       case Routs.productDetails:
-        return MaterialPageRoute(builder: (_) => ProuductDetails());
+        final product = settings.arguments as ProductModel;
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ProductDetailsCubit()..productDetailes(),
+            child: ProuductDetails(product: product),
+          ),
+        );
 
       case Routs.root:
         return MaterialPageRoute(

@@ -18,7 +18,7 @@ class ToppingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 97.w,
-      height: 110.h,
+      height: 120.h,
       decoration: BoxDecoration(
         color: const Color(0xff3C2F2F),
         borderRadius: BorderRadius.circular(15.r),
@@ -27,7 +27,7 @@ class ToppingCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 61.h,
+            height: 75.h,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -41,7 +41,7 @@ class ToppingCard extends StatelessWidget {
                 ),
               ],
               image: DecorationImage(
-                image: AssetImage(image),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               ),
             ),

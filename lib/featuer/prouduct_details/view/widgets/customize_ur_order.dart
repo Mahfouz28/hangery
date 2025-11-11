@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/constant/app_colors.dart';
+import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 import 'package:hangery/featuer/prouduct_details/view/widgets/spicy_slider.dart';
 
 class CustomizeUrOrder extends StatelessWidget {
-  const CustomizeUrOrder({super.key});
+  final String? image;
+  final String? title;
+  final String? subtitle;
+  const CustomizeUrOrder({super.key, this.image, this.title, this.subtitle});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(18.r),
-          child: Image.asset(
-            'assets/images/prouduct_details_image.png',
-            width: 140.w,
-            height: 180.h,
+        Flexible(
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18.r),
+                child: Image.network(
+                  image!,
+                  fit: BoxFit.contain,
+                  width: 140.w,
+                  height: 180.h,
+                ),
+              ),
+              CoustomText(
+                text: title!,
+                fontSize: 16.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ],
           ),
         ),
 
         18.horizontalSpace,
 
-        Expanded(
+        Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
