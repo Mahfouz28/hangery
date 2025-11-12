@@ -15,7 +15,6 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
-  late final PageController _pageController;
   int _currentScreen = 0;
 
   final List<Widget> _screens = [
@@ -25,20 +24,7 @@ class _RootState extends State<Root> {
     Profile(),
   ];
 
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: _currentScreen);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
   void _onItemTapped(int index) {
-    _pageController.jumpToPage(index);
     setState(() => _currentScreen = index);
   }
 
@@ -46,19 +32,22 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: _screens,
-        onPageChanged: (index) => setState(() => _currentScreen = index),
-      ),
+      body: IndexedStack(index: _currentScreen, children: _screens),
       bottomNavigationBar: Container(
-        height: 105.h,
+        margin: EdgeInsets.only(
+          left: 10.w,
+          right: 10.w,
+          bottom: 40.h,
+          top: 10.h,
+        ),
+        height: 80.h,
         decoration: BoxDecoration(
-          color: AppColors.primaryColor,
+          color: Colors.transparent,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.r),
-            topRight: Radius.circular(40.r),
+            topLeft: Radius.circular(100.r),
+            topRight: Radius.circular(100.r),
+            bottomLeft: Radius.circular(100.r),
+            bottomRight: Radius.circular(100.r),
           ),
           boxShadow: [
             BoxShadow(
@@ -70,8 +59,10 @@ class _RootState extends State<Root> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.r),
-            topRight: Radius.circular(40.r),
+            topLeft: Radius.circular(100.r),
+            topRight: Radius.circular(100.r),
+            bottomLeft: Radius.circular(100.r),
+            bottomRight: Radius.circular(100.r),
           ),
           child: Theme(
             data: Theme.of(context).copyWith(
@@ -79,31 +70,45 @@ class _RootState extends State<Root> {
               highlightColor: Colors.transparent,
             ),
             child: BottomNavigationBar(
-              backgroundColor: AppColors.primaryColor,
+              backgroundColor: Colors.white.withOpacity(0.4),
               currentIndex: _currentScreen,
               onTap: _onItemTapped,
               elevation: 0,
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white.withOpacity(0.6),
+              selectedItemColor: AppColors.primaryColor,
+
+              unselectedItemColor: Colors.white,
+
               selectedFontSize: 14.sp,
               unselectedFontSize: 13.sp,
               showUnselectedLabels: true,
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.home),
+                  icon: Icon(
+                    CupertinoIcons.home,
+                    color: Color.fromARGB(255, 252, 252, 252),
+                  ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.cart),
+                  icon: Icon(
+                    CupertinoIcons.cart,
+                    color: Color.fromARGB(255, 246, 246, 248),
+                  ),
                   label: 'Cart',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.receipt_long_outlined),
+                  icon: Icon(
+                    Icons.receipt_long_outlined,
+                    color: Color.fromARGB(255, 243, 243, 251),
+                  ),
                   label: 'Orders',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person_crop_circle),
+                  icon: Icon(
+                    CupertinoIcons.person_crop_circle,
+                    color: Color.fromARGB(255, 248, 248, 251),
+                  ),
                   label: 'Profile',
                 ),
               ],

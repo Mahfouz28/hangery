@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/constant/app_colors.dart';
-import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 
 class ItemCard extends StatefulWidget {
-  const ItemCard({super.key});
+  final String image;
+  final String title;
+  final String description;
+  final String price;
+  final int initialCount;
+  final ValueChanged<int>? onCountChanged;
+
+  const ItemCard({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.price,
+    this.initialCount = 0,
+    this.onCountChanged,
+  });
 
   @override
   State<ItemCard> createState() => _ItemCardState();
 }
 
 class _ItemCardState extends State<ItemCard> {
-  int count = 0;
+  late int count;
+
+  @override
+  void initState() {
+    super.initState();
+    count = widget.initialCount;
+  }
+
+  void _updateCount(int delta) {
+    setState(() {
+      count += delta;
+      if (count < 0) count = 0;
+    });
+    if (widget.onCountChanged != null) widget.onCountChanged!(count);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +54,20 @@ class _ItemCardState extends State<ItemCard> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
-              child: Image.asset(
-                'assets/images/Cheeseburger.png',
+              child: Image.network(
+                widget.image,
                 height: 80.h,
                 width: 80.w,
                 fit: BoxFit.cover,
               ),
             ),
             14.horizontalSpace,
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Cheeseburger',
+                    widget.title,
                     style: TextStyle(
                       fontSize: 17.sp,
                       fontWeight: FontWeight.w700,
@@ -49,14 +76,14 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                   6.verticalSpace,
                   Text(
-                    'Juicy beef, cheddar cheese, and soft buns.',
+                    widget.description,
                     style: TextStyle(fontSize: 13.sp, color: Colors.grey[600]),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   10.verticalSpace,
                   Text(
-                    '\$5.99',
+                    widget.price,
                     style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w600,
@@ -66,7 +93,6 @@ class _ItemCardState extends State<ItemCard> {
                 ],
               ),
             ),
-
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -75,11 +101,7 @@ class _ItemCardState extends State<ItemCard> {
                   children: [
                     _buildIconButton(
                       icon: Icons.remove,
-                      onTap: () {
-                        setState(() {
-                          if (count > 0) count--;
-                        });
-                      },
+                      onTap: () => _updateCount(-1),
                     ),
                     10.horizontalSpace,
                     Text(
@@ -92,28 +114,9 @@ class _ItemCardState extends State<ItemCard> {
                     10.horizontalSpace,
                     _buildIconButton(
                       icon: Icons.add,
-                      onTap: () {
-                        setState(() {
-                          count++;
-                        });
-                      },
+                      onTap: () => _updateCount(1),
                     ),
                   ],
-                ),
-                18.verticalSpace,
-                CustomTextButton(
-                  height: 40.h,
-                  width: 120.w,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    setState(() {
-                      count = 0;
-                    });
-                  },
-                  text: 'Remove',
-                  backgroundColor: AppColors.primaryColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
                 ),
               ],
             ),

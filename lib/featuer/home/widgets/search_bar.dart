@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 
 class HomeSearchBar extends StatefulWidget {
-  const HomeSearchBar({super.key});
+  final Function(String)? onSearch;
+  final TextEditingController? controller;
+
+  const HomeSearchBar({super.key, this.onSearch, this.controller});
 
   @override
   State<HomeSearchBar> createState() => _HomeSearchBarState();
@@ -50,7 +53,9 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
         color: Colors.white.withOpacity(0.95),
         elevation: _isFocused ? 6 : 2,
         shadowColor: Colors.black12,
-        child: TextField(
+        child: TextFormField(
+          onChanged: widget.onSearch,
+          controller: widget.controller,
           focusNode: _focusNode,
           textInputAction: TextInputAction.search,
           cursorColor: primaryColor,
@@ -91,10 +96,6 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
               horizontal: 16.w,
             ),
           ),
-          onSubmitted: (value) {
-            if (value.trim().isEmpty) return;
-            HapticFeedback.mediumImpact();
-          },
         ),
       ),
     );

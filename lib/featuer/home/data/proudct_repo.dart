@@ -17,4 +17,21 @@ class ProductRepo {
       return [];
     }
   }
+
+  /// Serche for products by name
+  Future<List<ProductModel>> searchProducts(String name) async {
+    try {
+      final response = await apiServices.get(
+        '/products',
+        params: {'name': name},
+      );
+      final data = response['data'] as List;
+      print('Response => $response');
+
+      return data.map((item) => ProductModel.fromJson(item)).toList();
+    } catch (e) {
+      print('Error searching products: $e');
+      return [];
+    }
+  }
 }

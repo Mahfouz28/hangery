@@ -6,9 +6,12 @@ class ApiServices {
   final DioClient dioClient = DioClient();
 
   // GET
-  Future<dynamic> get(String endPoint) async {
+  Future<dynamic> get(String endPoint, {dynamic params}) async {
     try {
-      final response = await dioClient.dio.get(endPoint);
+      final response = await dioClient.dio.get(
+        endPoint,
+        queryParameters: params,
+      );
       return response.data;
     } on DioException catch (e) {
       throw ApiExcpetoins.handleError(e);

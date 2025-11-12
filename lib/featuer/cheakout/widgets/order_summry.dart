@@ -3,7 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 
 class OrderSummry extends StatelessWidget {
-  const OrderSummry({super.key});
+  final double totalPrice;
+  final double deliveryFee;
+  final double taxes;
+  final double total;
+
+  const OrderSummry({
+    super.key,
+    required this.totalPrice,
+    required this.deliveryFee,
+    required this.taxes,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +27,7 @@ class OrderSummry extends StatelessWidget {
             text: 'Order summary',
             fontSize: 20.sp,
             fontWeight: FontWeight.w600,
+            color: Colors.white,
           ),
           20.verticalSpace,
           Padding(
@@ -26,14 +38,14 @@ class OrderSummry extends StatelessWidget {
                   children: [
                     CoustomText(
                       text: 'Total',
-                      color: Colors.grey,
+                      color: Colors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                     Spacer(),
                     CoustomText(
-                      text: '\$ 20.00',
-                      color: Colors.grey,
+                      text: '\$ $totalPrice EGP',
+                      color: Colors.white,
 
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -45,14 +57,14 @@ class OrderSummry extends StatelessWidget {
                   children: [
                     CoustomText(
                       text: 'Taxes',
-                      color: Colors.grey,
+                      color: Colors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                     Spacer(),
                     CoustomText(
-                      text: '\$ .04',
-                      color: Colors.grey,
+                      text: taxes.toString(),
+                      color: Colors.white,
 
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -65,14 +77,14 @@ class OrderSummry extends StatelessWidget {
                   children: [
                     CoustomText(
                       text: 'Delivery fees',
-                      color: Colors.grey,
+                      color: Colors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
                     ),
                     Spacer(),
                     CoustomText(
-                      text: '\$ 1.5',
-                      color: Colors.grey,
+                      text: deliveryFee.toString(),
+                      color: Colors.white,
 
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -90,12 +102,14 @@ class OrderSummry extends StatelessWidget {
                 text: 'Total: ',
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
               Spacer(),
               CoustomText(
-                text: '\$ 21.54',
+                text: '\$ $total EGP',
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ],
           ),
@@ -106,10 +120,12 @@ class OrderSummry extends StatelessWidget {
                 text: 'Estimated delivery time:',
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
               Spacer(),
               CoustomText(
                 text: '20-30 min',
+                color: Colors.white,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
               ),

@@ -14,6 +14,7 @@ class CustomTextButton extends StatelessWidget {
   final double borderRadius;
   final double borderWidth;
   final EdgeInsetsGeometry? padding;
+  final Widget? icon;
 
   const CustomTextButton({
     super.key,
@@ -29,6 +30,7 @@ class CustomTextButton extends StatelessWidget {
     this.borderRadius = 20,
     this.borderWidth = 2,
     this.padding,
+    this.icon,
   });
 
   @override
@@ -49,16 +51,23 @@ class CustomTextButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textScaler: TextScaler.linear(1.0),
-          text,
-          style: TextStyle(
-            color: textColor ?? Colors.white,
-            fontSize: fontSize ?? 16.sp,
-            fontWeight: fontWeight ?? FontWeight.w600,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textScaler: TextScaler.linear(1.0),
+              text,
+              style: TextStyle(
+                color: textColor ?? Colors.white,
+                fontSize: fontSize ?? 16.sp,
+                fontWeight: fontWeight ?? FontWeight.w600,
+              ),
+            ),
+            SizedBox(width: 10.w),
+            icon ?? SizedBox.shrink(),
+          ],
         ),
       ),
     );

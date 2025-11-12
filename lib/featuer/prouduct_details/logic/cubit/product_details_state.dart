@@ -1,20 +1,31 @@
 part of 'product_details_cubit.dart';
 
-sealed class ProductDetailsState {}
+abstract class ProductDetailsState {}
 
-final class ProductDetailsInitial extends ProductDetailsState {}
+class ProductDetailsInitial extends ProductDetailsState {}
 
-final class ProductDetailsLoading extends ProductDetailsState {}
+class ProductDetailsLoading extends ProductDetailsState {}
 
-final class ProductDetailsSuccess extends ProductDetailsState {
+class ProductDetailsSuccess extends ProductDetailsState {
   final List<ProuductDetailsModel> toppings;
   final List<ProuductDetailsModel> sideoptions;
 
   ProductDetailsSuccess(this.toppings, this.sideoptions);
 }
 
-final class ProductDetailsError extends ProductDetailsState {
-  final String error;
+class ProductDetailsError extends ProductDetailsState {
+  final String? errorMessage;
+  ProductDetailsError(this.errorMessage);
+}
 
-  ProductDetailsError(this.error);
+class AddToCartLoading extends ProductDetailsState {}
+
+class AddToCartSuccess extends ProductDetailsState {
+  final String successMessage;
+  AddToCartSuccess({required this.successMessage});
+}
+
+class AddToCartFailure extends ProductDetailsState {
+  final String errMessage;
+  AddToCartFailure({required this.errMessage});
 }

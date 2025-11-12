@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 
 class PaymentMethodes extends StatefulWidget {
-  const PaymentMethodes({super.key});
+  final String visa;
+  const PaymentMethodes({super.key, required this.visa});
 
   @override
   State<PaymentMethodes> createState() => _PaymentMethodesState();
@@ -53,7 +54,7 @@ class _PaymentMethodesState extends State<PaymentMethodes> {
             fontWeight: FontWeight.w500,
           ),
           subtitle: CoustomText(
-            text: '**** **** **** 1234',
+            text: widget.visa,
             color: Colors.white,
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,

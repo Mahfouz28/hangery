@@ -6,6 +6,7 @@ import 'package:hangery/core/routing/routs.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 import 'package:hangery/core/utils/naivgators.dart';
 import 'package:hangery/core/utils/pref_helpers.dart';
+import 'package:hangery/featuer/home/data/product_model.dart';
 import 'package:hangery/featuer/home/logic/cubit/product_cubit.dart';
 import 'package:hangery/featuer/home/widgets/card_item.dart';
 import 'package:hangery/featuer/home/widgets/catigory_list.dart';
@@ -22,6 +23,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController _searchController = TextEditingController();
+  List<ProductModel> searchResults = [];
   String? token;
   @override
   void initState() {
@@ -115,7 +118,12 @@ class _HomePageState extends State<HomePage> {
 
                       20.verticalSpace,
 
-                      const HomeSearchBar(),
+                      HomeSearchBar(
+                        controller: _searchController,
+                        onSearch: (value) {
+                          context.read<ProductCubit>().searchProducts(value);
+                        },
+                      ),
 
                       20.verticalSpace,
 

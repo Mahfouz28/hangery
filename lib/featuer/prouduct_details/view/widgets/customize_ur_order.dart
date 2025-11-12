@@ -8,7 +8,15 @@ class CustomizeUrOrder extends StatelessWidget {
   final String? image;
   final String? title;
   final String? subtitle;
-  const CustomizeUrOrder({super.key, this.image, this.title, this.subtitle});
+  final ValueChanged<double>? onSpicyChanged;
+
+  const CustomizeUrOrder({
+    super.key,
+    this.image,
+    this.title,
+    this.subtitle,
+    this.onSpicyChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +43,7 @@ class CustomizeUrOrder extends StatelessWidget {
             ],
           ),
         ),
-
         18.horizontalSpace,
-
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +58,7 @@ class CustomizeUrOrder extends StatelessWidget {
               ),
               6.verticalSpace,
               Text(
-                'Make your burger truly yours  choose your spice level and enjoy the perfect taste.',
+                'Make your burger truly yours — choose your spice level and enjoy the perfect taste.',
                 style: TextStyle(
                   fontSize: 13.sp,
                   color: Colors.white,
@@ -60,7 +66,6 @@ class CustomizeUrOrder extends StatelessWidget {
                 ),
               ),
               20.verticalSpace,
-
               Container(
                 padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
@@ -78,7 +83,7 @@ class CustomizeUrOrder extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: const SpicySlider(),
+                child: SpicySlider(onChanged: onSpicyChanged),
               ),
             ],
           ),

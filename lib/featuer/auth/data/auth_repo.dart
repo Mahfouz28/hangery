@@ -123,7 +123,7 @@ class AuthRepo {
         MapEntry('name', name),
         MapEntry('email', email),
         MapEntry('address', address),
-        if (visa != null && visa.isNotEmpty) MapEntry('visa', visa),
+        if (visa != null && visa.isNotEmpty) MapEntry('Visa', visa),
       ]);
 
       if (image != null && image.isNotEmpty) {
@@ -140,9 +140,9 @@ class AuthRepo {
 
       final response = await apiServices.post('/update-profile', formData);
 
-      print('✅ Profile update response: $response');
+      print(' Profile update response: $response');
       if (response is Map && response.containsKey('message')) {
-        print('✅ Server message: ${response['message']}');
+        print(' Server message: ${response['message']}');
       }
     } on DioException catch (e) {
       ApiExcpetoins.handleError(e);

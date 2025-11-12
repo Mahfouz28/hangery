@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpicySlider extends StatefulWidget {
-  const SpicySlider({super.key});
+  final ValueChanged<double>? onChanged; // 👈 callback to send value out
+  const SpicySlider({super.key, this.onChanged});
 
   @override
   State<SpicySlider> createState() => _SpicySliderState();
@@ -63,6 +64,8 @@ class _SpicySliderState extends State<SpicySlider> {
                   setState(() {
                     _spicyValue = value;
                   });
+                  // 👇 send value to parent
+                  widget.onChanged?.call(value);
                 },
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:hangery/featuer/auth/logic/auth_cubit.dart';
 import 'package:hangery/featuer/auth/data/auth_repo.dart';
 import 'package:hangery/featuer/auth/view/login_view.dart';
 import 'package:hangery/featuer/auth/view/sign_up_view.dart';
+import 'package:hangery/featuer/cart/logic/cubit/cart_cubit.dart';
 import 'package:hangery/featuer/cart/view/cart_page.dart';
 import 'package:hangery/featuer/cheakout/view/checkou_page.dart';
 import 'package:hangery/featuer/home/data/product_model.dart';
@@ -47,9 +48,19 @@ class AppRouter {
         );
 
       case Routs.cart:
-        return MaterialPageRoute(builder: (_) => CartPage());
+        final cartCubit = settings.arguments as CartCubit?;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: cartCubit ?? CartCubit(),
+            child: CartPage(),
+          ),
+        );
+
       case Routs.checkout:
-        return MaterialPageRoute(builder: (_) => CheckouPage());
+        final totalPrice = settings.arguments;
+        return MaterialPageRoute(
+          builder: (_) => CheckouPage(totalPrice: totalPrice as double),
+        );
       case Routs.orderHistory:
         return MaterialPageRoute(builder: (_) => OrderHistory());
 
@@ -58,7 +69,7 @@ class AppRouter {
 
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProductDetailsCubit()..productDetailes(),
+            create: (context) => ProductDetailsCubit()..productDetails(),
             child: ProuductDetails(product: product),
           ),
         );
@@ -72,7 +83,10 @@ class AppRouter {
         );
 
       default:
-        return MaterialPageRoute(builder: (_) => Text('Error'));
+        return MaterialPageRoute(
+          builder: (_) =>
+              Scaffold(body: Center(child: Text('No route defined'))),
+        );
     }
   }
 }

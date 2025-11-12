@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/sheard/widgets/coustom_text.dart';
 
 class SideOptionCard extends StatelessWidget {
   final String name;
   final String image;
   final VoidCallback onAdd;
+  final bool isSelected;
 
   const SideOptionCard({
     super.key,
     required this.name,
     required this.image,
     required this.onAdd,
+    this.isSelected = false,
   });
 
   @override
@@ -64,14 +65,20 @@ class SideOptionCard extends StatelessWidget {
                   height: 25.h,
                   child: IconButton.filled(
                     onPressed: onAdd,
-                    icon: Icon(
-                      Icons.add_rounded,
-                      color: Colors.white,
-                      size: 18.sp,
-                    ),
+                    icon: isSelected
+                        ? Icon(
+                            Icons.check_rounded,
+                            color: Colors.white,
+                            size: 18.sp,
+                          )
+                        : Icon(
+                            Icons.add_rounded,
+                            color: Colors.white,
+                            size: 18.sp,
+                          ),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(
-                        AppColors.primaryColor,
+                        isSelected ? Colors.green : Colors.red,
                       ),
                       padding: WidgetStateProperty.all(EdgeInsets.zero),
                       shape: WidgetStateProperty.all(

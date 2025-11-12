@@ -4,7 +4,8 @@ import 'package:hangery/core/constant/app_colors.dart';
 import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 
 class Pay extends StatelessWidget {
-  const Pay({super.key});
+  final double totalPayPrice;
+  const Pay({super.key, required this.totalPayPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +19,12 @@ class Pay extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
-                color: Colors.grey,
+                color: AppColors.primaryColor,
               ),
             ),
 
             Text(
-              '\$25.99',
+              '${totalPayPrice.toStringAsFixed(2)} EGP',
               style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w700,
