@@ -5,7 +5,9 @@ import 'package:hangery/core/sheard/widgets/custom_text_botton.dart';
 
 class Pay extends StatelessWidget {
   final double totalPayPrice;
-  const Pay({super.key, required this.totalPayPrice});
+  final VoidCallback? onPayButtonPressed;
+
+  const Pay({super.key, required this.totalPayPrice, this.onPayButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -39,83 +41,9 @@ class Pay extends StatelessWidget {
           width: 200.w,
           textColor: Colors.white,
           onPressed: () {
-            showAdaptiveDialog(
-              context: context,
-
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 32,
-                    horizontal: 20,
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF1B5E20), // dark green
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.check,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      const Text(
-                        'Success !',
-                        style: TextStyle(
-                          color: Color(0xFF1B5E20),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                      const SizedBox(height: 12),
-
-                      const Text(
-                        'Your payment was successful.\nA receipt for this purchase has been sent to your email.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                          height: 1.4,
-                        ),
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF1B5E20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            'Go Back',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
+            if (onPayButtonPressed != null) {
+              onPayButtonPressed!();
+            }
           },
           text: 'Pay Now',
           backgroundColor: AppColors.primaryColor,

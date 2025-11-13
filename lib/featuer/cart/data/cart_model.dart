@@ -66,7 +66,6 @@ class CartData {
       id: json['id'] ?? 0,
       totalPrice:
           double.tryParse(json['total_price']?.toString() ?? '0') ?? 0.0,
-      // ✅ FIX: Corrected key name (was "itmes") + null safety
       items:
           (json['items'] as List?)?.map((e) => CartItem.fromJson(e)).toList() ??
           [],

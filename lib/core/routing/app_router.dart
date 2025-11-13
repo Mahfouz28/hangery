@@ -5,8 +5,10 @@ import 'package:hangery/featuer/auth/logic/auth_cubit.dart';
 import 'package:hangery/featuer/auth/data/auth_repo.dart';
 import 'package:hangery/featuer/auth/view/login_view.dart';
 import 'package:hangery/featuer/auth/view/sign_up_view.dart';
+import 'package:hangery/featuer/cart/data/cart_model.dart';
 import 'package:hangery/featuer/cart/logic/cubit/cart_cubit.dart';
 import 'package:hangery/featuer/cart/view/cart_page.dart';
+import 'package:hangery/featuer/cheakout/logic/cubit/checkout_cubit.dart';
 import 'package:hangery/featuer/cheakout/view/checkou_page.dart';
 import 'package:hangery/featuer/home/data/product_model.dart';
 import 'package:hangery/featuer/home/logic/cubit/product_cubit.dart';
@@ -57,10 +59,18 @@ class AppRouter {
         );
 
       case Routs.checkout:
-        final totalPrice = settings.arguments;
+        final args = settings.arguments as Map<String, dynamic>;
+
+        final totalPrice = args['totalPrice'] as double;
+        final cartModel = args['cartModel'] as GetCartResponseModel;
+
         return MaterialPageRoute(
-          builder: (_) => CheckouPage(totalPrice: totalPrice as double),
+          builder: (_) => BlocProvider(
+            create: (_) => CheckoutCubit(),
+            child: CheckouPage(totalPrice: totalPrice, cartModel: cartModel),
+          ),
         );
+
       case Routs.orderHistory:
         return MaterialPageRoute(builder: (_) => OrderHistory());
 

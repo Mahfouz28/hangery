@@ -220,7 +220,10 @@ class _CartPageState extends State<CartPage> {
                               onCheckout: () {
                                 context.pushNamed(
                                   Routs.checkout,
-                                  arguments: totalPrice,
+                                  arguments: {
+                                    'totalPrice': totalPrice,
+                                    'cartModel': state.cartModel,
+                                  },
                                 );
                               },
                               totalAmount: state.isDeleting
